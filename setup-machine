@@ -12,7 +12,7 @@ useradd user
 passwd user
 usermod -aG wheel user
 
-read -p "Do you want to install avahi for mdns (recommended!)? " -n 1 -r
+read -p "Do you want to install avahi for mdns (recommended!)? [y/n] " -n 1 -r
 echo    # move to a new line
 
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -20,6 +20,8 @@ then
     yum install -y avahi
     cp config-files/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 	iptables-restore < config-files/iptables-avahi
+	service messagebus restart # For some reason this is down and avahi fails to start.
+	service avahi-daemon start
 	echo "Run 'ssh-copy-id user@centos-builder.local' before ssh password " 
 else
 	iptables-restore < config-files/iptables
@@ -47,7 +49,7 @@ wget -P /etc/yum.repos.d/ http://download.opensuse.org/repositories/shells:fish:
 yum -y install fish git2u-all
 
 
-read -p "Do you want to set fish as user's default shell? " -n 1 -r
+read -p "Do you want to set fish as user's default shell? [y/n] " -n 1 -r
 echo    # move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
