@@ -18,7 +18,7 @@ echo    # move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     yum install -y avahi
-    cp config-files/avahi-deamon.conf /etc/avahi/avahi-deamon.conf
+    cp config-files/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 	iptables-restore < config-files/iptables-avahi
 	echo "Run 'ssh-copy-id user@centos-builder.local' before ssh password " 
 else
