@@ -1,0 +1,57 @@
+#!/bin/bash
+
+
+# First thing is first, setup some sane security
+
+# Let users in the wheel group be sudoers.
+cp sudoers /etc/sudoers
+
+# Setup a new user named "user"
+
+useradd user
+passwd user --stdin
+usermod -aG wheel user
+
+read -p "Do you want to install avahi for mdns (recommended!)? " -n 1 -r
+echo    # move to a new line
+
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    yum install -y avahi
+    cp config-files/avahi-deamon.conf /etc/avahi/avahi-deamon.conf
+	iptables-restore < config-files/iptables-avahi
+	echo "Run 'ssh-copy-id user@centos-builder.local' before ssh password " 
+else
+	iptables-restore < config-files/iptables
+	echo "Run 'ssh-copy-id user@[ip-adddress]' before ssh password " 
+fi
+
+# Disallow password authentication
+read -p "authentication is disabled (hit enter to continue)"
+cp config-files/sshd_config /etc/ssh/sshd_config
+service sshd reload
+
+
+# Install some repos for convenience sake
+# We want ius-release, which contains high quality upstream stable pacakages for centos. The default repos are mostly
+# garbage but we need them to build saife stuff. This lets us get utilities and modern packages without overriding 
+# anthing available in the base repo unless we explicitly ask for it. For example, the git2u package lets us get a 
+# version of git from this century as opposed to the git package in centos 6 that is many versions behind. 
+
+yum install -y epel-release
+yum install -y https://rhel6.iuscommunity.org/ius-release.rpm
+
+# Alright now we can get some goodies.
+
+# Installs fish so for the rest of the scripts. 
+wget -P /etc/yum.repos.d/ http://download.opensuse.org/repositories/shells:fish:release:2/CentOS_6/shells:fish:release:2.repo
+yum -y install fish git
+
+
+read -p "Do you want to set fish as user's default shell? " -n 1 -r
+echo    # move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    chsh /usr/bin/fish user
+fi
+
