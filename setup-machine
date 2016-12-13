@@ -17,7 +17,7 @@ echo    # move to a new line
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    yum install -y avahi
+    yum install -y avahi wget
     cp config-files/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 	iptables-restore < config-files/iptables-avahi
 	service messagebus restart # For some reason this is down and avahi fails to start.
@@ -44,7 +44,9 @@ yum install -y https://rhel6.iuscommunity.org/ius-release.rpm
 
 # Alright now we can get some goodies.
 
-# Installs fish so for the rest of the scripts. 
+# Installs 
+# 1. fish, for the rest of the scripts. 
+# 2. git, to checkout code.
 wget -P /etc/yum.repos.d/ http://download.opensuse.org/repositories/shells:fish:release:2/CentOS_6/shells:fish:release:2.repo
 yum -y install fish git2u-all
 
@@ -53,6 +55,6 @@ read -p "Do you want to set fish as user's default shell? [y/n] " -n 1 -r
 echo    # move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    chsh /usr/bin/fish user
+    chsh -s /usr/bin/fish user
 fi
 
