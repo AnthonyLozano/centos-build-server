@@ -1,4 +1,8 @@
 #!/bin/bash
 
 # Fetch repo
-# Run Script
+curl -LO https://github.com/AnthonyLozano/centos-build-server/archive/master.zip
+yum install -y unzip
+unzip master.zip
+cd master
+./setup-machine
