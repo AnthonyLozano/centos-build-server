@@ -27,7 +27,7 @@ If you forget to setup networking, you must login as root and setup your network
 ## Runs scripts
 Now you can run the script:
 ```
-curl https://raw.githubusercontent.com/AnthonyLozano/centos-build-server-master/install | /bin/bash
+bash <(curl https://raw.githubusercontent.com/AnthonyLozano/centos-build-server/master/install)
 ```
 
 Here is what it does in gory detail. 
