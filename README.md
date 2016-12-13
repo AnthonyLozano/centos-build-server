@@ -24,6 +24,7 @@ Install CentOs 6.x minimal into the virtual machine.
 
 If you forget to setup networking, you must login as root and setup your network interfaces. https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html
 
+## Runs scripts
 Now you can run the script:
 curl https://raw.githubusercontent.com/AnthonyLozano/centos-build-server/master/install | /bin/bash
 
