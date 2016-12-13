@@ -58,3 +58,4 @@ then
     chsh -s /usr/bin/fish user
 fi
 
+source install-packages

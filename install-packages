@@ -39,7 +39,6 @@ packages=(
   "extra-cmake-modules"
   "gcc"
   "gcc-c++"
-  "git"
   "glibc-devel"
   "glibc-headers"
   "java"
