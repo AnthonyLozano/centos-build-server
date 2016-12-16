@@ -40,7 +40,7 @@ Here is what it does in gory detail.
 1. Sets up iptables firewall
 1. Prompts user to upload their ssh key, then turns off password login for sshd.
 1. Install some stuff for convenience sake
-    1.1 Installs ius-release, which contains high quality upstream stable pacakages for centos. The default repos are mostly garbage but we need them to build saife stuff. This lets us get utilities and modern packages without overriding anthing available in the base repo unless we explicitly ask for it. For example, the git2u-all package lets us get a version of git from this century as opposed to the git package in centos 6 that is many versions behind.
-    1.1 Installs fish. Needed for the non-root scripts to run.
-    1.1 Installs git2u-all
+  1.1 Installs ius-release, which contains high quality upstream stable pacakages for centos. The default repos are mostly garbage but we need them to build saife stuff. This lets us get utilities and modern packages without overriding anthing available in the base repo unless we explicitly ask for it. For example, the git2u-all package lets us get a version of git from this century as opposed to the git package in centos 6 that is many versions behind.
+  1.1 Installs fish. Needed for the non-root scripts to run.
+  1.1 Installs git2u-all
 1 Optionally allows the user to set their default shell to fish.
