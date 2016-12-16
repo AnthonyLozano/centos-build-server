@@ -4,13 +4,23 @@
 # First thing is first, setup some sane security
 
 # Let users in the wheel group be sudoers.
-cp sudoers /etc/sudoers
+cp config-files/sudoers /etc/sudoers
 
 # Setup a new user named "user"
 
 useradd user
 passwd user
 usermod -aG wheel user
+
+read -p "Generate ssh key for gerrit? [y/n] " -n 1 -r
+echo    # move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''
+    cat ~/.ssh/id_rsa.pub
+    read -p "Copy the above key into gerrit now. Hit any key to continue..."
+fi
+
 
 read -p "Do you want to install avahi for mdns (recommended!)? [y/n] " -n 1 -r
 echo    # move to a new line
@@ -58,7 +68,7 @@ then
     chsh -s /usr/bin/fish user
 fi
 
-yum groupinstall -y 'Development Tools' --skip-broken  # Complains cause of gitu, but works fine.
+yum groupinstall -y 'Development Tools' --skip-broken  # need --skep-broken because yum complains about gitu, but it works fine.
 #yum install -y pcre-devel
 
 # Install swig from source for SaifeAdapater
@@ -69,7 +79,13 @@ make
 make install
 cd ..
 
-# Install makepp from our 
-yum install -y Dependencies/makepp-2.0.rpm
+# Install makepp
+yum install -y Dependencies/makepp-*.rpm
 
-wget 
+# Install protobuf 
+tar -xf Dependencies/protobuf-*
+cd protobuf-*
+./configure
+make
+make install
+cd ..
