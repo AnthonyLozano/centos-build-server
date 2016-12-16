@@ -59,8 +59,17 @@ then
 fi
 
 yum groupinstall -y 'Development Tools' --skip-broken  # Complains cause of gitu, but works fine.
-yum install -y pcre-devel
-curl -LO http://prdownloads.sourceforge.net/swig/swig-3.0.10.tar.gz
-cd swig-3.0.10
+#yum install -y pcre-devel
+
+# Install swig from source for SaifeAdapater
+tar -xf Dependencies/swig-*
+cd swig-*
 ./configure
-make && make install
+make
+make install
+cd ..
+
+# Install makepp from our 
+yum install -y Dependencies/makepp-2.0.rpm
+
+wget 
