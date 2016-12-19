@@ -29,13 +29,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     yum install -y avahi wget
     cp config-files/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
-	iptables-restore < config-files/iptables-avahi
+	iptables-restore config-files/iptables-avahi
 	sudo service iptables restart
 	service messagebus restart # For some reason this is down and avahi fails to start.
 	service avahi-daemon start
 	echo "Run 'ssh-copy-id user@centos-builder.local' before ssh password " 
 else
-	iptables-restore < config-files/iptables
+	iptables-restore config-files/iptables
 	echo "Run 'ssh-copy-id user@[ip-adddress]' before ssh password " 
 fi
 
