@@ -30,6 +30,7 @@ then
     yum install -y avahi wget
     cp config-files/avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 	iptables-restore < config-files/iptables-avahi
+	sudo service iptables restart
 	service messagebus restart # For some reason this is down and avahi fails to start.
 	service avahi-daemon start
 	echo "Run 'ssh-copy-id user@centos-builder.local' before ssh password " 
@@ -69,8 +70,10 @@ then
     chsh -s /usr/bin/fish user
 fi
 
+
+yum install -y git2u-all 
 yum groupinstall -y 'Development Tools' --skip-broken  # need --skep-broken because yum complains about gitu, but it works fine.
-yum -y install git2u-all java-1.8.0-openjdk-devel.x86_64
+yum install -y java-1.8.0-openjdk-devel.x86_64
 
 # Discover and set java home. maven will need this set for all users, so put it in /etc/environment.
 export JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
@@ -94,3 +97,5 @@ cd protobuf-*
 make
 make install
 cd ..
+
+# Install maven
