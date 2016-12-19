@@ -58,8 +58,9 @@ yum install -y https://rhel6.iuscommunity.org/ius-release.rpm
 # Installs 
 # 1. fish, for the rest of the scripts. 
 # 2. git, to checkout code.
+yum install -y wget
 wget -P /etc/yum.repos.d/ http://download.opensuse.org/repositories/shells:fish:release:2/CentOS_6/shells:fish:release:2.repo
-yum -y install fish 
+yum install -y fish 
 
 
 read -p "Do you want to set fish as user's default shell? [y/n] " -n 1 -r
