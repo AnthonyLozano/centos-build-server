@@ -40,6 +40,7 @@ fi
 
 # Disallow password authentication
 read -p "authentication is disabled (hit enter to continue)"
+echo	# move to a new line
 cp config-files/sshd_config /etc/ssh/sshd_config
 service sshd reload
 
@@ -58,7 +59,7 @@ yum install -y https://rhel6.iuscommunity.org/ius-release.rpm
 # 1. fish, for the rest of the scripts. 
 # 2. git, to checkout code.
 wget -P /etc/yum.repos.d/ http://download.opensuse.org/repositories/shells:fish:release:2/CentOS_6/shells:fish:release:2.repo
-yum -y install fish git2u-all
+yum -y install fish 
 
 
 read -p "Do you want to set fish as user's default shell? [y/n] " -n 1 -r
@@ -69,7 +70,11 @@ then
 fi
 
 yum groupinstall -y 'Development Tools' --skip-broken  # need --skep-broken because yum complains about gitu, but it works fine.
-#yum install -y pcre-devel
+yum -y install git2u-all java-1.8.0-openjdk-devel.x86_64
+
+# Discover and set java home. maven will need this set for all users, so put it in /etc/environment.
+export JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
+echo JAVA_HOME=$JAVA_HOME >> /etc/environment
 
 # Install swig from source for SaifeAdapater
 tar -xf Dependencies/swig-*
