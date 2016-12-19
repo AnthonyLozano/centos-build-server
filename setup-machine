@@ -18,7 +18,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''
     cat ~/.ssh/id_rsa.pub
-    read -p "Copy the above key into gerrit now. Hit any key to continue..."
+    read -p "Copy the above key into gerrit now. Hit enter to continue..."
 fi
 
 

@@ -1,6 +1,6 @@
 *filter
-:INPUT REJECT [0:0]
-:FORWARD REJECT [0:0]
+:INPUT DENY [0:0]
+:FORWARD DENY [0:0]
 :OUTPUT ACCEPT [1:188]
 -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT -m comment --comment "allow existing / related connections"
 -A INPUT -p icmp -j ACCEPT -m comment --comment "allow ping"
