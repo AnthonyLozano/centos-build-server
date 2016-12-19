@@ -79,6 +79,8 @@ export JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System
 echo JAVA_HOME=$JAVA_HOME >> /etc/environment
 
 # Install swig from source for SaifeAdapater
+# Need prce
+yum install -y pcre-devel
 tar -xf Dependencies/swig-*
 cd swig-*
 ./configure
@@ -98,3 +100,5 @@ make install
 cd ..
 
 # Install maven
+tar -xf Dependencies/apache-maven-3.0.3-bin.tar.gz -C /opt/
+ln -s /opt/apache-maven-3.0.3/bin/mvn /usr/bin
