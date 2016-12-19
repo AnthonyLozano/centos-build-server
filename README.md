@@ -13,7 +13,7 @@ Unfortunately, there are some manual steps to this process. This should be quick
 
 Go to settings and set up networking. The script assumes this configuration: Adapter 1 NAT, Adapter 2 Host-only. Adapter 2 will be sending out the mDNS broadcasts from avahi if you choose to install mdns. SSH will only be served on Adapter 2. 
 
-You will need to make sure you are running a DHCP server on your Host-only network if you are using only ipv4. You can google how to do that in VirtualBox. Also, consider increasing the processor count to max recommended value if you want builds to complete faster.
+If you are using only ipv4, You will need to make sure you are running a DHCP server on your Host-only network. You can google how to do that in VirtualBox. If you are using ipv6 and mdns, you don't need to worry about the DHCP server. Also, consider increasing the processor count to max recommended value if you want builds to complete faster.
 
 ## Installing CentOs
 Install CentOs 6.x minimal into the virtual machine.
