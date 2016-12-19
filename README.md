@@ -27,24 +27,11 @@ Install CentOs 6.x minimal into the virtual machine.
 If you forget to setup networking, you must login as root and setup your network interfaces. https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html
 
 ## Runs scripts
-Now you can run the script:
+Now you can run the script on the Virtual Machine:
 ```
 bash <(curl https://raw.githubusercontent.com/AnthonyLozano/centos-build-server/master/install)
 ```
 
-The script will prompt you for a few inputs and pause at times to allow you to copy down useful information.
+The script will prompt you for a few inputs and pause at times to allow you to copy down useful information. After asking if you want to change the user's default shell to fish you can leave it running unattended.
 
-Here is what it does in gory detail. 
-
-1. Creates a user account.
-1. Gives it a password.
-1. Adds it to the wheel group.
-1. Adds the wheel group to the sudoers file.
-1. Optionally installs avahi-daemon
-1. Sets up iptables firewall
-1. Prompts user to upload their ssh key, then turns off password login for sshd.
-1. Install some stuff for convenience sake
-  1. Installs ius-release, which contains high quality upstream stable packages for CentOs. The default repositories are mostly garbage but we need them to build Saife stuff. This lets us get utilities and modern packages without overriding anything available in the base repository unless we explicitly ask for it. For example, the git2u-all package lets us get a version of git from this century as opposed to the git package in CentOs 6 that is many versions behind.
-  1. Installs fish. Needed for the non-root scripts to run.
-  1. Installs git2u-all
-1 Optionally allows the user to set their default shell to fish.
+After running the script you should be able to checkout the SaifeSdkCpp project and build it with maven. 
