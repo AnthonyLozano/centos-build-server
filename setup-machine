@@ -19,7 +19,6 @@ then
 	su user -c "ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''"
     cat /home/user/.ssh/id_rsa.pub
     read -p "Copy the above key into gerrit now. Hit enter to continue..."
-    exit
 fi
 
 
