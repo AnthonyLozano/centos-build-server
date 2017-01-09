@@ -76,7 +76,7 @@ yum groupinstall -y 'Development Tools' --skip-broken  # need --skep-broken beca
 yum install -y java-1.8.0-openjdk-devel.x86_64
 
 # Discover and set java home. maven will need this set for all users, so put it in /etc/environment.
-export JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
+export JAVA_HOME="$(jrunscript -e 'print(java.lang.System.getProperty("java.home").slice(0, -3));')"
 echo JAVA_HOME=$JAVA_HOME >> /etc/environment
 
 # Install swig from source for SaifeAdapater
