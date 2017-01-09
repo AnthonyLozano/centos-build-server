@@ -71,8 +71,11 @@ then
 fi
 
 
+# Get development tools: git, 'Development Tools', python35, vcapi, openjdk 8
 yum install -y git2u-all 
 yum groupinstall -y 'Development Tools' --skip-broken  # need --skep-broken because yum complains about gitu, but it works fine.
+yum install -y python35u python35u-pip
+pip3.5 install vcapi
 yum install -y java-1.8.0-openjdk-devel.x86_64
 
 # Discover and set java home. maven will need this set for all users, so put it in /etc/environment.
